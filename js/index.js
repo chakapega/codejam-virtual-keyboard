@@ -132,6 +132,66 @@ let pressed = false;
 let isShiftAndAltPressed = false;
 let isCapsLockPressed = false;
 
+const mouseDownHandler = (e, obj) => {
+  const textArea = document.querySelector('.text-area');
+
+  pressed = true;
+
+  document.querySelectorAll('.key-container').forEach(keyContainer => {
+    if (keyContainer.attributes.code.value === obj.code) {
+      if (keyContainer.attributes.functionKey.value !== 'true') {
+        if (isCapsLockPressed) {
+          textArea.textContent += keyContainer.attributes.key.value.toUpperCase();
+        } else if (!e.shiftKey) {
+          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
+        } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+          textArea.textContent += keyContainer.attributes.altKey.value;
+        } else if (e.shiftKey) {
+          textArea.textContent += keyContainer.attributes.key.value;
+        };
+      } else if (keyContainer.attributes.functionKey.value === 'true') {
+        if (keyContainer.attributes.key.value === 'CapsLock') {
+          isCapsLockPressed = !isCapsLockPressed;
+
+          document.querySelector('.caps-lock-indicator').classList.toggle('caps-lock-indicator_active');
+        } else if (keyContainer.attributes.key.value === 'Backspace') {
+          textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length -1);
+        } else if (keyContainer.attributes.key.value === 'Space') {
+          textArea.textContent += ' ';
+        } else if (keyContainer.attributes.key.value === 'Tab') {
+          textArea.textContent += '        ';
+        } else if (keyContainer.attributes.key.value === 'Enter') {
+          textArea.textContent += textArea.innerText + '\n';
+        };
+      };
+    };
+  });
+
+  if (pressed) {
+    document.querySelectorAll('.key-container').forEach(keyContainer => {
+      if (keyContainer.attributes.code.value === obj.code) {
+        keyContainer.classList.add('pressed-key-container');
+
+        if (e.altKey === true && e.shiftKey === true) {
+          isShiftAndAltPressed = true;
+        };
+      };
+    });
+  };
+};
+
+const mouseUpHandler = (e, obj) => {
+  pressed = false;
+
+  if (!pressed) {
+    document.querySelectorAll('.key-container').forEach(keyContainer => {
+      if (keyContainer.attributes.code.value === obj.code) {
+        keyContainer.classList.remove('pressed-key-container');
+      };
+    });
+  };
+};
+
 const textAreaCreation = () => {
   const textArea = document.createElement('textarea');
 
@@ -150,6 +210,12 @@ const keyContainersCreation = obj => {
   keyContainer.setAttribute('functionKey', obj.functionKey);
   keyContainer.setAttribute('key', obj.key);
   keyContainer.setAttribute('altKey', obj.altKey);
+  keyContainer.addEventListener('mousedown', e => {
+    mouseDownHandler(e, obj);
+  });
+  keyContainer.addEventListener('mouseup', e => {
+    mouseUpHandler(e, obj);
+  });
 
   if (obj.widthType === 2) {
     keyContainer.classList.add('double-key-container');
