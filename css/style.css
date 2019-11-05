@@ -10,8 +10,8 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 .text-area {
-  width: 40%;
-  height: 12%;
+  width: 42%;
+  height: 20%;
   margin-bottom: 30px;
   font-size: 23px;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
@@ -37,9 +37,8 @@ body {
   cursor: pointer;
   transition: all 70ms linear;
 }
-.key-container span {
-  display: flex;
-  width: 60%;
+.key-container:hover {
+  background-color: #00000019;
 }
 .double-key-container {
   width: 108px;
@@ -49,6 +48,10 @@ body {
 }
 .space {
   width: 296px;
+}
+.key-container span {
+  display: flex;
+  width: 60%;
 }
 .main-span {
   justify-content: center;
@@ -60,7 +63,7 @@ body {
 }
 .pressed-key-container {
   box-shadow: none;
-  background-color: #0000001c;
+  background-color: #00000025;
 }
 .caps-lock-indicator-container {
   display: flex;
@@ -71,7 +74,7 @@ body {
   width: 10px;
   height: 5px;
   border-radius: 4px;
-  background-color: gray;
+  background-color: #80808099;
 }
 .caps-lock-indicator_active {
   background-color: red;
