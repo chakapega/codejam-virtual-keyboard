@@ -14,8 +14,12 @@ const mouseDownHandler = (e, obj) => {
       keyContainer.classList.add('pressed-key-container');
 
       if (keyContainer.attributes.functionKey.value !== 'true') {
-        if (isCapsLockPressed) {
+        if (isCapsLockPressed && e.shiftKey === false) {
           textArea.textContent += keyContainer.attributes.key.value.toUpperCase();
+        } else if (isCapsLockPressed && e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+          textArea.textContent += keyContainer.attributes.altKey.value;
+        } else if (isCapsLockPressed && e.shiftKey) {
+          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
         } else if (!e.shiftKey) {
           textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
         } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
@@ -168,8 +172,12 @@ document.addEventListener('keydown', (e) => {
       keyContainer.classList.add('pressed-key-container');
 
       if (keyContainer.attributes.functionKey.value !== 'true') {
-        if (isCapsLockPressed) {
+        if (isCapsLockPressed && e.shiftKey === false) {
           textArea.textContent += keyContainer.attributes.key.value.toUpperCase();
+        } else if (isCapsLockPressed && e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+          textArea.textContent += keyContainer.attributes.altKey.value;
+        } else if (isCapsLockPressed && e.shiftKey) {
+          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
         } else if (!e.shiftKey) {
           textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
         } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
