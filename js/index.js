@@ -15,17 +15,17 @@ const mouseDownHandler = (e, obj) => {
 
       if (keyContainer.attributes.functionKey.value !== 'true') {
         if (isCapsLockPressed && e.shiftKey === false) {
-          textArea.textContent += keyContainer.attributes.key.value.toUpperCase();
+          textArea.value += keyContainer.attributes.key.value.toUpperCase();
         } else if (isCapsLockPressed && e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.textContent += keyContainer.attributes.altKey.value;
+          textArea.value += keyContainer.attributes.altKey.value;
         } else if (isCapsLockPressed && e.shiftKey) {
-          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
+          textArea.value += keyContainer.attributes.key.value.toLowerCase();
         } else if (!e.shiftKey) {
-          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
+          textArea.value += keyContainer.attributes.key.value.toLowerCase();
         } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.textContent += keyContainer.attributes.altKey.value;
+          textArea.value += keyContainer.attributes.altKey.value;
         } else if (e.shiftKey) {
-          textArea.textContent += keyContainer.attributes.key.value;
+          textArea.value += keyContainer.attributes.key.value;
         }
       } else {
         switch (keyContainer.attributes.key.value) {
@@ -35,16 +35,16 @@ const mouseDownHandler = (e, obj) => {
             document.querySelector('.caps-lock-indicator').classList.toggle('caps-lock-indicator_active');
             break;
           case 'Backspace':
-            textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1);
+            textArea.value = textArea.value.slice(0, textArea.value.length - 1);
             break;
           case 'Space':
-            textArea.textContent += ' ';
+            textArea.value += ' ';
             break;
           case 'Tab':
-            textArea.textContent += '        ';
+            textArea.value += '        ';
             break;
           case 'Enter':
-            textArea.textContent += `${textArea.innerText}\n`;
+            textArea.value += `\n`;
             break;
 
           default:
@@ -161,6 +161,8 @@ document.addEventListener('keydown', (e) => {
   const arrayOfKeyContainers = document.querySelectorAll('.key-container');
   const textArea = document.querySelector('.text-area');
 
+  console.log(textArea.value);
+
   e.preventDefault();
 
   if (e.altKey && e.shiftKey) {
@@ -173,17 +175,17 @@ document.addEventListener('keydown', (e) => {
 
       if (keyContainer.attributes.functionKey.value !== 'true') {
         if (isCapsLockPressed && e.shiftKey === false) {
-          textArea.textContent += keyContainer.attributes.key.value.toUpperCase();
+          textArea.value += keyContainer.attributes.key.value.toUpperCase();
         } else if (isCapsLockPressed && e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.textContent += keyContainer.attributes.altKey.value;
+          textArea.value += keyContainer.attributes.altKey.value;
         } else if (isCapsLockPressed && e.shiftKey) {
-          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
+          textArea.value += keyContainer.attributes.key.value.toLowerCase();
         } else if (!e.shiftKey) {
-          textArea.textContent += keyContainer.attributes.key.value.toLowerCase();
+          textArea.value += keyContainer.attributes.key.value.toLowerCase();
         } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.textContent += keyContainer.attributes.altKey.value;
+          textArea.value += keyContainer.attributes.altKey.value;
         } else if (e.shiftKey) {
-          textArea.textContent += keyContainer.attributes.key.value;
+          textArea.value += keyContainer.attributes.key.value;
         }
       } else {
         switch (keyContainer.attributes.key.value) {
@@ -193,16 +195,16 @@ document.addEventListener('keydown', (e) => {
             document.querySelector('.caps-lock-indicator').classList.toggle('caps-lock-indicator_active');
             break;
           case 'Backspace':
-            textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length - 1);
+            textArea.value = textArea.value.slice(0, textArea.value.length - 1);
             break;
           case 'Space':
-            textArea.textContent += ' ';
+            textArea.value += ' ';
             break;
           case 'Tab':
-            textArea.textContent += '        ';
+            textArea.value += '        ';
             break;
           case 'Enter':
-            textArea.textContent += `${textArea.innerText}\n`;
+            textArea.value += `\n`;
             break;
 
           default:
