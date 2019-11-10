@@ -44,7 +44,7 @@ const mouseDownHandler = (e, obj) => {
             textArea.value += '        ';
             break;
           case 'Enter':
-            textArea.value += `\n`;
+            textArea.value += '\n';
             break;
 
           default:
@@ -161,8 +161,6 @@ document.addEventListener('keydown', (e) => {
   const arrayOfKeyContainers = document.querySelectorAll('.key-container');
   const textArea = document.querySelector('.text-area');
 
-  console.log(textArea.value);
-
   e.preventDefault();
 
   if (e.altKey && e.shiftKey) {
@@ -204,7 +202,7 @@ document.addEventListener('keydown', (e) => {
             textArea.value += '        ';
             break;
           case 'Enter':
-            textArea.value += `\n`;
+            textArea.value += '\n';
             break;
 
           default:
