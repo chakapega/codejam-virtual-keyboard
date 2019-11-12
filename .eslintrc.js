@@ -19,6 +19,8 @@ module.exports = {
             {
               "js": "always"
             }
-          ]
+          ],
+        "arrow-parens": ["error", "as-needed"],
+        "max-len": ["error", { "code": 120 }]
     }
 };

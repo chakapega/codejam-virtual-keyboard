@@ -3,28 +3,28 @@ import { arrayOfCyrillicCharacters, arrayOfLatinCharacters } from './arraysOfKey
 let isShiftAndAltPressed = false;
 let isCapsLockPressed = false;
 
-const mouseDownHandler = (e, obj) => {
-  const arrayOfKeyContainers = document.querySelectorAll('.key-container');
+const mouseDownHandler = (event, obj) => {
+  const arrayOfKeyContainers = Array.from(document.querySelectorAll('.key-container'));
   const textArea = document.querySelector('.text-area');
 
-  e.preventDefault();
+  event.preventDefault();
 
-  arrayOfKeyContainers.forEach((keyContainer) => {
+  arrayOfKeyContainers.forEach(keyContainer => {
     if (keyContainer.attributes.code.value === obj.code) {
       keyContainer.classList.add('pressed-key-container');
 
       if (keyContainer.attributes.functionKey.value !== 'true') {
-        if (isCapsLockPressed && e.shiftKey === false) {
+        if (isCapsLockPressed && event.shiftKey === false) {
           textArea.value += keyContainer.attributes.key.value.toUpperCase();
-        } else if (isCapsLockPressed && e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+        } else if (isCapsLockPressed && event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
           textArea.value += keyContainer.attributes.altKey.value;
-        } else if (isCapsLockPressed && e.shiftKey) {
+        } else if (isCapsLockPressed && event.shiftKey) {
           textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (!e.shiftKey) {
+        } else if (!event.shiftKey) {
           textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+        } else if (event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
           textArea.value += keyContainer.attributes.altKey.value;
-        } else if (e.shiftKey) {
+        } else if (event.shiftKey) {
           textArea.value += keyContainer.attributes.key.value;
         }
       } else {
@@ -48,6 +48,7 @@ const mouseDownHandler = (e, obj) => {
             break;
 
           default:
+            break;
         }
       }
     }
@@ -55,8 +56,10 @@ const mouseDownHandler = (e, obj) => {
 };
 
 const mouseUpHandler = () => {
-  if (document.querySelector('.pressed-key-container')) {
-    document.querySelector('.pressed-key-container').classList.remove('pressed-key-container');
+  const pressedKeyContainer = document.querySelector('.pressed-key-container');
+
+  if (pressedKeyContainer) {
+    pressedKeyContainer.classList.remove('pressed-key-container');
   }
 };
 
@@ -69,7 +72,7 @@ const textAreaCreation = () => {
   document.querySelector('body').appendChild(textArea);
 };
 
-const keyContainersCreation = (obj) => {
+const keyContainersCreation = obj => {
   const keyContainer = document.createElement('div');
   const mainSpan = document.createElement('span');
 
@@ -77,8 +80,8 @@ const keyContainersCreation = (obj) => {
   keyContainer.setAttribute('functionkey', obj.functionKey);
   keyContainer.setAttribute('key', obj.key);
   keyContainer.setAttribute('altKey', obj.altKey);
-  keyContainer.addEventListener('mousedown', (e) => {
-    mouseDownHandler(e, obj);
+  keyContainer.addEventListener('mousedown', event => {
+    mouseDownHandler(event, obj);
   });
 
   keyContainer.classList.add('key-container');
@@ -125,64 +128,63 @@ const keyboardContainerCreation = () => {
   const keyboardContainer = document.createElement('div');
   keyboardContainer.classList.add('keyboard-container');
 
-  switch (localStorage.language) {
+  switch (localStorage.getItem('language')) {
     case 'en':
-      arrayOfLatinCharacters.forEach((obj) => {
-        keyboardContainer.appendChild(keyContainersCreation(obj));
-      });
+      arrayOfLatinCharacters.forEach(obj => keyboardContainer.appendChild(keyContainersCreation(obj)));
       break;
 
     case 'ru':
-      arrayOfCyrillicCharacters.forEach((obj) => {
-        keyboardContainer.appendChild(keyContainersCreation(obj));
-      });
+      arrayOfCyrillicCharacters.forEach(obj => keyboardContainer.appendChild(keyContainersCreation(obj)));
       break;
 
     default:
+      break;
   }
 
   document.querySelector('body').appendChild(keyboardContainer);
 };
 
 const deleteKeyboardContainer = () => {
-  if (document.querySelector('.keyboard-container')) {
-    document.querySelector('.keyboard-container').remove();
+  const keyboardContainer = document.querySelector('.keyboard-container');
+
+  if (keyboardContainer) {
+    keyboardContainer.remove();
   }
 };
 
-if (!localStorage.language) {
+if (!localStorage.getItem('language')) {
   localStorage.setItem('language', 'en');
 }
 
 textAreaCreation();
 keyboardContainerCreation();
 
-document.addEventListener('keydown', (e) => {
-  const arrayOfKeyContainers = document.querySelectorAll('.key-container');
+document.addEventListener('keydown', event => {
+  const arrayOfKeyContainers = Array.from(document.querySelectorAll('.key-container'));
   const textArea = document.querySelector('.text-area');
 
-  e.preventDefault();
+  event.preventDefault();
 
-  if (e.altKey && e.shiftKey) {
+  if (event.altKey && event.shiftKey) {
     isShiftAndAltPressed = true;
   }
 
-  arrayOfKeyContainers.forEach((keyContainer) => {
-    if (keyContainer.attributes.code.value === e.code) {
+  arrayOfKeyContainers.forEach(keyContainer => {
+    if (keyContainer.attributes.code.value === event.code) {
       keyContainer.classList.add('pressed-key-container');
 
       if (keyContainer.attributes.functionKey.value !== 'true') {
-        if (isCapsLockPressed && e.shiftKey === false) {
+        if (isCapsLockPressed && event.shiftKey === false) {
           textArea.value += keyContainer.attributes.key.value.toUpperCase();
-        } else if (isCapsLockPressed && e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+        } else if (isCapsLockPressed && event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
           textArea.value += keyContainer.attributes.altKey.value;
-        } else if (isCapsLockPressed && e.shiftKey) {
+        } else if (isCapsLockPressed && event.shiftKey) {
           textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (!e.shiftKey) {
+        } else if (!event.shiftKey) {
           textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (e.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
+        } else if (event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
           textArea.value += keyContainer.attributes.altKey.value;
-        } else if (e.shiftKey) {
+        } else if (event.shiftKey) {
           textArea.value += keyContainer.attributes.key.value;
         }
       } else {
@@ -206,26 +208,27 @@ document.addEventListener('keydown', (e) => {
             break;
 
           default:
+            break;
         }
       }
     }
   });
 });
 
-document.addEventListener('keyup', (e) => {
-  const arrayOfKeyContainers = document.querySelectorAll('.key-container');
+document.addEventListener('keyup', event => {
+  const arrayOfKeyContainers = Array.from(document.querySelectorAll('.key-container'));
 
-  arrayOfKeyContainers.forEach((keyContainer) => {
-    if (keyContainer.attributes.code.value === e.code) {
+  arrayOfKeyContainers.forEach(keyContainer => {
+    if (keyContainer.attributes.code.value === event.code) {
       keyContainer.classList.remove('pressed-key-container');
     }
   });
 
   if (isShiftAndAltPressed) {
-    if (localStorage.language === 'en') {
-      localStorage.language = 'ru';
+    if (localStorage.getItem('language') === 'en') {
+      localStorage.setItem('language', 'ru');
     } else {
-      localStorage.language = 'en';
+      localStorage.setItem('language', 'en');
     }
 
     deleteKeyboardContainer();
