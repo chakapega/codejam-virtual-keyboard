@@ -3,32 +3,42 @@ import { arrayOfCyrillicCharacters, arrayOfLatinCharacters } from './arraysOfKey
 let isShiftAndAltPressed = false;
 let isCapsLockPressed = false;
 
-const mouseDownHandler = (event, obj) => {
+const keystrokeAction = (event, obj) => {
   const arrayOfKeyContainers = Array.from(document.querySelectorAll('.key-container'));
   const textArea = document.querySelector('.text-area');
 
+  const eventCode = event.type === 'mousedown' ? obj.code : event.code;
+
   event.preventDefault();
 
+  if (event.type === 'keydown' && event.altKey && event.shiftKey) {
+    isShiftAndAltPressed = true;
+  }
+
   arrayOfKeyContainers.forEach(keyContainer => {
-    if (keyContainer.attributes.code.value === obj.code) {
+    if (keyContainer.getAttribute('code') === eventCode) {
+      const key = keyContainer.getAttribute('key');
+
       keyContainer.classList.add('pressed-key-container');
 
-      if (keyContainer.attributes.functionKey.value !== 'true') {
+      if (keyContainer.getAttribute('key-type') !== 'function-key') {
+        const altKey = keyContainer.getAttribute('alt-key');
+
         if (isCapsLockPressed && event.shiftKey === false) {
-          textArea.value += keyContainer.attributes.key.value.toUpperCase();
-        } else if (isCapsLockPressed && event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.value += keyContainer.attributes.altKey.value;
+          textArea.value += key.toUpperCase();
+        } else if (isCapsLockPressed && event.shiftKey && altKey) {
+          textArea.value += altKey;
         } else if (isCapsLockPressed && event.shiftKey) {
-          textArea.value += keyContainer.attributes.key.value.toLowerCase();
+          textArea.value += key.toLowerCase();
         } else if (!event.shiftKey) {
-          textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.value += keyContainer.attributes.altKey.value;
+          textArea.value += key.toLowerCase();
+        } else if (event.shiftKey && altKey) {
+          textArea.value += altKey;
         } else if (event.shiftKey) {
-          textArea.value += keyContainer.attributes.key.value;
+          textArea.value += key;
         }
       } else {
-        switch (keyContainer.attributes.key.value) {
+        switch (key) {
           case 'CapsLock':
             isCapsLockPressed = !isCapsLockPressed;
 
@@ -77,12 +87,17 @@ const keyContainersCreation = obj => {
   const mainSpan = document.createElement('span');
 
   keyContainer.setAttribute('code', obj.code);
-  keyContainer.setAttribute('functionkey', obj.functionKey);
   keyContainer.setAttribute('key', obj.key);
-  keyContainer.setAttribute('altKey', obj.altKey);
-  keyContainer.addEventListener('mousedown', event => {
-    mouseDownHandler(event, obj);
-  });
+
+  if (obj.keyType) {
+    keyContainer.setAttribute('key-type', obj.keyType);
+  }
+
+  if (obj.altKey) {
+    keyContainer.setAttribute('alt-key', obj.altKey);
+  }
+
+  keyContainer.addEventListener('mousedown', event => keystrokeAction(event, obj));
 
   keyContainer.classList.add('key-container');
 
@@ -159,67 +174,13 @@ if (!localStorage.getItem('language')) {
 textAreaCreation();
 keyboardContainerCreation();
 
-document.addEventListener('keydown', event => {
-  const arrayOfKeyContainers = Array.from(document.querySelectorAll('.key-container'));
-  const textArea = document.querySelector('.text-area');
-
-  event.preventDefault();
-
-  if (event.altKey && event.shiftKey) {
-    isShiftAndAltPressed = true;
-  }
-
-  arrayOfKeyContainers.forEach(keyContainer => {
-    if (keyContainer.attributes.code.value === event.code) {
-      keyContainer.classList.add('pressed-key-container');
-
-      if (keyContainer.attributes.functionKey.value !== 'true') {
-        if (isCapsLockPressed && event.shiftKey === false) {
-          textArea.value += keyContainer.attributes.key.value.toUpperCase();
-        } else if (isCapsLockPressed && event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.value += keyContainer.attributes.altKey.value;
-        } else if (isCapsLockPressed && event.shiftKey) {
-          textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (!event.shiftKey) {
-          textArea.value += keyContainer.attributes.key.value.toLowerCase();
-        } else if (event.shiftKey && keyContainer.attributes.altKey.value !== 'undefined') {
-          textArea.value += keyContainer.attributes.altKey.value;
-        } else if (event.shiftKey) {
-          textArea.value += keyContainer.attributes.key.value;
-        }
-      } else {
-        switch (keyContainer.attributes.key.value) {
-          case 'CapsLock':
-            isCapsLockPressed = !isCapsLockPressed;
-
-            document.querySelector('.caps-lock-indicator').classList.toggle('caps-lock-indicator_active');
-            break;
-          case 'Backspace':
-            textArea.value = textArea.value.slice(0, textArea.value.length - 1);
-            break;
-          case 'Space':
-            textArea.value += ' ';
-            break;
-          case 'Tab':
-            textArea.value += '        ';
-            break;
-          case 'Enter':
-            textArea.value += '\n';
-            break;
-
-          default:
-            break;
-        }
-      }
-    }
-  });
-});
+document.addEventListener('keydown', event => keystrokeAction(event));
 
 document.addEventListener('keyup', event => {
   const arrayOfKeyContainers = Array.from(document.querySelectorAll('.key-container'));
 
   arrayOfKeyContainers.forEach(keyContainer => {
-    if (keyContainer.attributes.code.value === event.code) {
+    if (keyContainer.getAttribute('code') === event.code) {
       keyContainer.classList.remove('pressed-key-container');
     }
   });
@@ -238,6 +199,4 @@ document.addEventListener('keyup', event => {
   }
 });
 
-document.addEventListener('mouseup', () => {
-  mouseUpHandler();
-});
+document.addEventListener('mouseup', () => mouseUpHandler());

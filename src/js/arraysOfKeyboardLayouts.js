@@ -37,10 +37,10 @@ export const arrayOfCyrillicCharacters = [
     key: '=', altKey: '+', code: 'Equal', widthType: 1,
   },
   {
-    key: 'Backspace', code: 'Backspace', widthType: 2, functionKey: 'true',
+    key: 'Backspace', code: 'Backspace', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Tab', code: 'Tab', widthType: 1, functionKey: 'true',
+    key: 'Tab', code: 'Tab', widthType: 1, keyType: 'function-key',
   },
   { key: 'Й', code: 'KeyQ', widthType: 1 },
   { key: 'Ц', code: 'KeyW', widthType: 1 },
@@ -58,10 +58,10 @@ export const arrayOfCyrillicCharacters = [
     key: '\\', altKey: '/', code: 'Backslash', widthType: 1,
   },
   {
-    key: 'Del', code: 'Delete', widthType: 1, functionKey: 'true',
+    key: 'Del', code: 'Delete', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'CapsLock', code: 'CapsLock', widthType: 2, functionKey: 'true',
+    key: 'CapsLock', code: 'CapsLock', widthType: 2, keyType: 'function-key',
   },
   { key: 'Ф', code: 'KeyA', widthType: 1 },
   { key: 'Ы', code: 'KeyS', widthType: 1 },
@@ -75,10 +75,10 @@ export const arrayOfCyrillicCharacters = [
   { key: 'Ж', code: 'Semicolon', widthType: 1 },
   { key: 'Э', code: 'Quote', widthType: 1 },
   {
-    key: 'Enter', code: 'Enter', widthType: 2, functionKey: 'true',
+    key: 'Enter', code: 'Enter', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Shift', code: 'ShiftLeft', widthType: 2, functionKey: 'true',
+    key: 'Shift', code: 'ShiftLeft', widthType: 2, keyType: 'function-key',
   },
   { key: 'Я', code: 'KeyZ', widthType: 1 },
   { key: 'Ч', code: 'KeyX', widthType: 1 },
@@ -93,34 +93,34 @@ export const arrayOfCyrillicCharacters = [
     key: '.', altKey: ',', code: 'Slash', widthType: 1,
   },
   {
-    key: '▲', code: 'ArrowUp', widthType: 1, functionKey: 'true',
+    key: '▲', code: 'ArrowUp', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'Shift', code: 'ShiftRight', widthType: 2, functionKey: 'true',
+    key: 'Shift', code: 'ShiftRight', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Ctrl', code: 'ControlLeft', widthType: 2, functionKey: 'true',
+    key: 'Ctrl', code: 'ControlLeft', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Alt', code: 'AltLeft', widthType: 1, functionKey: 'true',
+    key: 'Alt', code: 'AltLeft', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'Space', code: 'Space', widthType: 3, functionKey: 'true',
+    key: 'Space', code: 'Space', widthType: 3, keyType: 'function-key',
   },
   {
-    key: 'Alt', code: 'AltRight', widthType: 1, functionKey: 'true',
+    key: 'Alt', code: 'AltRight', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'Ctrl', code: 'ControlRight', widthType: 2, functionKey: 'true',
+    key: 'Ctrl', code: 'ControlRight', widthType: 2, keyType: 'function-key',
   },
   {
-    key: '◀', code: 'ArrowLeft', widthType: 1, functionKey: 'true',
+    key: '◀', code: 'ArrowLeft', widthType: 1, keyType: 'function-key',
   },
   {
-    key: '▼', code: 'ArrowDown', widthType: 1, functionKey: 'true',
+    key: '▼', code: 'ArrowDown', widthType: 1, keyType: 'function-key',
   },
   {
-    key: '▶', code: 'ArrowRight', widthType: 1, functionKey: 'true',
+    key: '▶', code: 'ArrowRight', widthType: 1, keyType: 'function-key',
   },
 ];
 export const arrayOfLatinCharacters = [
@@ -164,10 +164,10 @@ export const arrayOfLatinCharacters = [
     key: '=', altKey: '+', code: 'Equal', widthType: 1,
   },
   {
-    key: 'Backspace', code: 'Backspace', widthType: 2, functionKey: 'true',
+    key: 'Backspace', code: 'Backspace', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Tab', code: 'Tab', widthType: 1, functionKey: 'true',
+    key: 'Tab', code: 'Tab', widthType: 1, keyType: 'function-key',
   },
   { key: 'Q', code: 'KeyQ', widthType: 1 },
   { key: 'W', code: 'KeyW', widthType: 1 },
@@ -189,10 +189,10 @@ export const arrayOfLatinCharacters = [
     key: '\\', altKey: '|', code: 'Backslash', widthType: 1,
   },
   {
-    key: 'Del', code: 'Delete', widthType: 1, functionKey: 'true',
+    key: 'Del', code: 'Delete', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'CapsLock', code: 'CapsLock', widthType: 2, functionKey: 'true',
+    key: 'CapsLock', code: 'CapsLock', widthType: 2, keyType: 'function-key',
   },
   { key: 'A', code: 'KeyA', widthType: 1 },
   { key: 'S', code: 'KeyS', widthType: 1 },
@@ -210,10 +210,10 @@ export const arrayOfLatinCharacters = [
     key: "'", altKey: '"', code: 'Quote', widthType: 1,
   },
   {
-    key: 'Enter', code: 'Enter', widthType: 2, functionKey: 'true',
+    key: 'Enter', code: 'Enter', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Shift', code: 'ShiftLeft', widthType: 2, functionKey: 'true',
+    key: 'Shift', code: 'ShiftLeft', widthType: 2, keyType: 'function-key',
   },
   { key: 'Z', code: 'KeyZ', widthType: 1 },
   { key: 'X', code: 'KeyX', widthType: 1 },
@@ -232,33 +232,33 @@ export const arrayOfLatinCharacters = [
     key: '/', altKey: '?', code: 'Slash', widthType: 1,
   },
   {
-    key: '▲', code: 'ArrowUp', widthType: 1, functionKey: 'true',
+    key: '▲', code: 'ArrowUp', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'Shift', code: 'ShiftRight', widthType: 2, functionKey: 'true',
+    key: 'Shift', code: 'ShiftRight', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Ctrl', code: 'ControlLeft', widthType: 2, functionKey: 'true',
+    key: 'Ctrl', code: 'ControlLeft', widthType: 2, keyType: 'function-key',
   },
   {
-    key: 'Alt', code: 'AltLeft', widthType: 1, functionKey: 'true',
+    key: 'Alt', code: 'AltLeft', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'Space', code: 'Space', widthType: 3, functionKey: 'true',
+    key: 'Space', code: 'Space', widthType: 3, keyType: 'function-key',
   },
   {
-    key: 'Alt', code: 'AltRight', widthType: 1, functionKey: 'true',
+    key: 'Alt', code: 'AltRight', widthType: 1, keyType: 'function-key',
   },
   {
-    key: 'Ctrl', code: 'ControlRight', widthType: 2, functionKey: 'true',
+    key: 'Ctrl', code: 'ControlRight', widthType: 2, keyType: 'function-key',
   },
   {
-    key: '◀', code: 'ArrowLeft', widthType: 1, functionKey: 'true',
+    key: '◀', code: 'ArrowLeft', widthType: 1, keyType: 'function-key',
   },
   {
-    key: '▼', code: 'ArrowDown', widthType: 1, functionKey: 'true',
+    key: '▼', code: 'ArrowDown', widthType: 1, keyType: 'function-key',
   },
   {
-    key: '▶', code: 'ArrowRight', widthType: 1, functionKey: 'true',
+    key: '▶', code: 'ArrowRight', widthType: 1, keyType: 'function-key',
   },
 ];
